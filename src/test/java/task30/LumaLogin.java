@@ -26,16 +26,16 @@ public class LumaLogin {
     @Test
     void loginTest(){
         driver.navigate().to(URL);
-        WebElement signIn = driver.findElement(SignIn);
+        WebElement signIn = driver.findElement(signInVar);
         signIn.click();
-        WebElement emailInput = driver.findElement(EmailInput);
+        WebElement emailInput = driver.findElement(emailInputVar);
         emailInput.sendKeys(LOGIN_USER_EMAIL);
-        WebElement passwordInput = driver.findElement(PasswordInput);
+        WebElement passwordInput = driver.findElement(passwordInputVar);
         passwordInput.sendKeys(LOGIN_PASSWORD);
-        WebElement signInButton = driver.findElement(SignInButton);
+        WebElement signInButton = driver.findElement(signInButtonVar);
         signInButton.click();
 
-        Assert.assertEquals(driver.findElement(AssertElement).isDisplayed(), true, "Assert Element is not displayed");
+        Assert.assertEquals(driver.findElement(assertElementVar).isDisplayed(), true, "Assert Element is not displayed");
         System.out.println("Login test executed successfully.");
     }
 
