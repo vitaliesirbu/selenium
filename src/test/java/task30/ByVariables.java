@@ -1,11 +1,13 @@
 package task30;
 
-public class ByVariables {
-    public static String SignInXPath = "/html/body/div[2]/header/div[1]/div/ul/li[2]/a";
-    public static String EmailInputXPath = "//*[@id=\"email\"]";
-    public static String PasswordInputXPath = "//*[@id=\"pass\"]";
-    public static String SignInButtonXPath = "//*[@id=\"send2\"]/span";
+import org.openqa.selenium.By;
 
-    public static String AssertXPath = "/html/body/div[2]/header/div[1]/div/ul/li[1]/span";
+public class ByVariables {
+    public static By SignIn = By.xpath("/html/body/div[2]/header/div[1]/div/ul/li[2]/a");
+    public static By EmailInput = By.xpath("//*[@id=\"email\"]");
+    public static By PasswordInput = By.xpath("//*[@id=\"pass\"]");
+    public static By SignInButton = By.xpath("//*[@id=\"send2\"]/span");
+
+    public static By AssertElement = By.xpath("/html/body/div[2]/header/div[1]/div/ul/li[1]/span");
 
 }

@@ -26,16 +26,16 @@ public class LumaLogin {
     @Test
     void loginTest(){
         driver.navigate().to(URL);
-        WebElement signIn = driver.findElement(By.xpath(SignInXPath));
+        WebElement signIn = driver.findElement(SignIn);
         signIn.click();
-        WebElement emailInput = driver.findElement(By.xpath(EmailInputXPath));
+        WebElement emailInput = driver.findElement(EmailInput);
         emailInput.sendKeys(LOGIN_USER_EMAIL);
-        WebElement passwordInput = driver.findElement(By.xpath(PasswordInputXPath));
+        WebElement passwordInput = driver.findElement(PasswordInput);
         passwordInput.sendKeys(LOGIN_PASSWORD);
-        WebElement signInButton = driver.findElement(By.xpath(SignInButtonXPath));
+        WebElement signInButton = driver.findElement(SignInButton);
         signInButton.click();
 
-        Assert.assertTrue(driver.findElement(By.xpath(AssertXPath)).isDisplayed());
+        Assert.assertTrue(driver.findElement(AssertElement).isDisplayed());
     }
 
     @AfterClass
