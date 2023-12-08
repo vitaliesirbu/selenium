@@ -9,5 +9,7 @@ public class ByVariables {
     public static By SignInButton = new By.ById("send2");
 
     public static By AssertElement = By.className("logged-in");
+   // public static By AssertElement = new By.ByCssSelector("body > div.page-wrapper > header > div.panel.wrapper > div > ul > li.greet.welcome > span");
+
 
 }

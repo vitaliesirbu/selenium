@@ -35,7 +35,8 @@ public class LumaLogin {
         WebElement signInButton = driver.findElement(SignInButton);
         signInButton.click();
 
-        Assert.assertTrue(driver.findElement(AssertElement).isDisplayed());
+        Assert.assertEquals(driver.findElement(AssertElement).isDisplayed(), true, "Assert Element is not displayed");
+        System.out.println("Login test executed successfully.");
     }
 
     @AfterClass
