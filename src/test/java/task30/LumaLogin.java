@@ -9,9 +9,14 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static task30.ByVariables.*;
+
 public class LumaLogin {
 
     private WebDriver driver;
+    final static String URL = "https://magento.softwaretestingboard.com/";
+    final static String LOGIN_USER_EMAIL = "vitaliesirbu@coherentsolutions.com";
+    final static String LOGIN_PASSWORD = "Admin123!";
 
     @BeforeClass
     void setup(){
@@ -20,17 +25,17 @@ public class LumaLogin {
 
     @Test
     void loginTest(){
-        driver.navigate().to("https://magento.softwaretestingboard.com/");
-        WebElement signIn = driver.findElement(By.xpath("/html/body/div[2]/header/div[1]/div/ul/li[2]/a"));
+        driver.navigate().to(URL);
+        WebElement signIn = driver.findElement(By.xpath(SignInXPath));
         signIn.click();
-        WebElement emailInput = driver.findElement(By.xpath("//*[@id=\"email\"]"));
-        emailInput.sendKeys("vitaliesirbu@coherentsolutions.com");
-        WebElement passwordInput = driver.findElement(By.xpath("//*[@id=\"pass\"]"));
-        passwordInput.sendKeys("Admin123!");
-        WebElement signInButton = driver.findElement(By.xpath("//*[@id=\"send2\"]/span"));
+        WebElement emailInput = driver.findElement(By.xpath(EmailInputXPath));
+        emailInput.sendKeys(LOGIN_USER_EMAIL);
+        WebElement passwordInput = driver.findElement(By.xpath(PasswordInputXPath));
+        passwordInput.sendKeys(LOGIN_PASSWORD);
+        WebElement signInButton = driver.findElement(By.xpath(SignInButtonXPath));
         signInButton.click();
 
-        Assert.assertTrue(driver.findElement(By.xpath("/html/body/div[2]/header/div[1]/div/ul/li[1]/span")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath(AssertXPath)).isDisplayed());
     }
 
     @AfterClass
