@@ -7,9 +7,6 @@ public class ByVariables {
     public static By emailInputVar = new By.ById("email");
     public static By passwordInputVar = new By.ById("pass");
     public static By signInButtonVar = new By.ById("send2");
-
-    public static By assertElementVar = By.className("logged-in");
-
-
+    public static By loggedIn = By.cssSelector("div[class='panel header'] span[class='logged-in']");
 
 }

@@ -24,7 +24,7 @@ public class LumaLogin {
     }
 
     @Test
-    void loginTest(){
+    void loginTest() throws InterruptedException {
         driver.navigate().to(URL);
         WebElement signIn = driver.findElement(signInVar);
         signIn.click();
@@ -35,8 +35,17 @@ public class LumaLogin {
         WebElement signInButton = driver.findElement(signInButtonVar);
         signInButton.click();
 
-        Assert.assertEquals(driver.findElement(assertElementVar).isDisplayed(), true, "Assert Element is not displayed");
-        System.out.println("Login test executed successfully.");
+        Thread.sleep(2000);
+
+        String expectedResult = "Welcome, Vitalie S!";
+
+        WebElement loggedInElement = driver.findElement(loggedIn);
+        String actualResult = loggedInElement.getText();
+
+        Assert.assertEquals(actualResult, expectedResult, "The actual result does not match the expected result.");
+
+        System.out.println("Test Passed: The actual result matches the expected result.");
+
     }
 
     @AfterClass
