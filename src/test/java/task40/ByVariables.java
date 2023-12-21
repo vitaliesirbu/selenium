@@ -1,4 +1,4 @@
-package task30;
+package task40;
 
 import org.openqa.selenium.By;
 
