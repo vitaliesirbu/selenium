@@ -18,6 +18,8 @@ import org.testng.asserts.Assertion;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
+import static task38_lecture.SearchPage.URL;
+
 public class SampleTest {
 
     private static final String SEARCH_VALUE = "Microsoft";
@@ -37,10 +39,14 @@ public class SampleTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
+    private void navigateToUrl() {
+        driver.get(SearchPage.URL);
+    }
 
     @Test
     void sampleTest(){
         searchPage = new SearchPage(driver);
+        navigateToUrl();
         ResultPage resultPage = searchPage.search("Microsoft");
         resultPage.waitForResults();
 

@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 public class SearchPage {
 
-    private static final String URL="https://google.com";
+    public static final String URL="https://google.com";
     private static final By SEARCH_INPUT = By.name("q");
 
     private final WebDriver driver;
@@ -19,11 +19,9 @@ public class SearchPage {
     }
 
     public ResultPage search(String value) {
-        navigateToUrl();
         WebElement searchInput = driver.findElement(SEARCH_INPUT);
         searchInput.sendKeys(value);
         searchInput.submit();
-
         return new ResultPage(driver);
     }
 }
