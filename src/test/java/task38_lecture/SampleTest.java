@@ -42,6 +42,7 @@ public class SampleTest {
     void sampleTest(){
         searchPage = new SearchPage(driver);
         ResultPage resultPage = searchPage.search("Microsoft");
+        resultPage.waitForResults();
 
         Assert.assertTrue(resultPage.getResultHeaders().stream().allMatch(text -> text.contains(SEARCH_VALUE)));
     }

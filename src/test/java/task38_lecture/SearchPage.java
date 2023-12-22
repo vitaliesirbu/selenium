@@ -13,11 +13,13 @@ public class SearchPage {
 
     public SearchPage(WebDriver driver) {
         this.driver = driver;
-
+    }
+    private void navigateToUrl() {
         this.driver.get(URL);
     }
 
     public ResultPage search(String value) {
+        navigateToUrl();
         WebElement searchInput = driver.findElement(SEARCH_INPUT);
         searchInput.sendKeys(value);
         searchInput.submit();

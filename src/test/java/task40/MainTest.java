@@ -29,7 +29,7 @@ public class MainTest {
     @Test(dataProvider = "credentialsProvider")
     void testLogin(String email, String password, String expectedUserName) throws InterruptedException {
         LoginPage loginPage = new LoginPage(driver, LOGIN_PAGE_URL);
-        String actualResult = loginPage.logedin(email, password);
+        String actualResult = loginPage.logIn(email, password);
         System.out.println("Actual Result: " + actualResult);
         Assert.assertTrue(actualResult.contains(expectedUserName), "Login with user [" + expectedUserName + "] failed");
     }

@@ -19,7 +19,7 @@ public class LoginPage {
         this.driver.get(Url);
     }
 
-    public String logedin (String email, String password) throws InterruptedException {
+    public String logIn(String email, String password) throws InterruptedException {
         WebElement signIn = driver.findElement(ByVariables.signInVar);
         signIn.click();
 

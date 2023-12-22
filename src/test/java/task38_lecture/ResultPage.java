@@ -18,7 +18,8 @@ public class ResultPage {
 
     public ResultPage(WebDriver driver) {
         this.driver = driver;
-
+    }
+    public void waitForResults() {
         new WebDriverWait(this.driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(MORE_RESULTS));
     }
 
