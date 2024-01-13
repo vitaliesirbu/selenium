@@ -1,4 +1,4 @@
-package task60_page_factory;
+package com.coherentsolutions.training.automation.web.sirbu.utilities;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
