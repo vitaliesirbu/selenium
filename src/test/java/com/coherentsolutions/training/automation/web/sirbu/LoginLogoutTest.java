@@ -2,6 +2,7 @@ package com.coherentsolutions.training.automation.web.sirbu;
 
 import com.coherentsolutions.training.automation.web.sirbu.pageobjects.HomePage;
 import com.coherentsolutions.training.automation.web.sirbu.pageobjects.LoginPage;
+import com.coherentsolutions.training.automation.web.sirbu.utilities.ConfigReader;
 import com.coherentsolutions.training.automation.web.sirbu.utilities.WebDriverSingleton;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,11 +12,8 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.time.Duration;
-import java.util.Properties;
+
 
 public class LoginLogoutTest {
 
@@ -30,22 +28,15 @@ public class LoginLogoutTest {
     @BeforeClass
     public void setUp(){
 
-        Properties properties = new Properties();
-        try(InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties")){
-            properties.load(input);
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-
         driver = WebDriverSingleton.getDriver();
-        driver.get(properties.getProperty("url"));
+        driver.get(ConfigReader.getInstance().getUrl());
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
 
 
-        username = properties.getProperty("username");
-        password = properties.getProperty("password");
-        expectedResult = properties.getProperty("expectedresult");
+        username = ConfigReader.getInstance().getUsername();
+        password = ConfigReader.getInstance().getPassword();
+        expectedResult = ConfigReader.getInstance().getExpectedResult();
 
 
         loginPage = new LoginPage(driver);
