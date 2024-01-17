@@ -9,28 +9,21 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
-
     protected WebDriver driver;
-    protected LoginPage loginPage;
-    protected HomePage homePage;
     protected WaitUtils waitUtils;
 
     @BeforeMethod
     public void setUp() {
         driver = WebDriverSingleton.getDriver();
         driver.get(ConfigReader.getInstance().getUrl());
-        loginPage = new LoginPage(driver);
-        homePage = new HomePage(driver);
         waitUtils = new WaitUtils(driver);
     }
 
-    protected void login(String username, String password) {
-        loginPage.login(username, password);
-        waitUtils.waitForElementPresence(homePage.getLoggedInLocator(), 5);
-    }
-
-    protected void logout() {
-        homePage.logout();
-        waitUtils.waitForElementAbsence(HomePage.getLoggedInLocator(), 5);
+    protected <T> T initPage(Class<T> pageClass) {
+        try {
+            return pageClass.getConstructor(WebDriver.class).newInstance(driver);
+        } catch (Exception e) {
+            throw new RuntimeException("Could not initialize page object: " + pageClass.getSimpleName(), e);
+        }
     }
 }
