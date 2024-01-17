@@ -1,11 +1,12 @@
-package task60_page_factory;
+package com.coherentsolutions.training.automation.web.sirbu.pageobjects;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
+public class LoginPage extends BasePage {
 
     @FindBy(id="email")
     private WebElement emailField;
@@ -19,8 +20,17 @@ public class LoginPage {
     @FindBy(className = "authorization-link")
     private WebElement signInLink;
 
-    public LoginPage(WebDriver driver){
-        PageFactory.initElements(driver, this);
+    public LoginPage(WebDriver driver) {
+        super(driver);
+    }
+
+    @Override
+    public boolean isOpened() {
+        try {
+            return loginButton.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
     public void login(String email, String password) {
