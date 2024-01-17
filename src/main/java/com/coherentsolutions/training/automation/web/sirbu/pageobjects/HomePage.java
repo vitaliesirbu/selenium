@@ -13,9 +13,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 
-public class HomePage {
+public class HomePage extends BasePage {
 
-    private WebDriver driver;
     private static final By LOGGED_IN_LOCATOR = By.className("logged-in");
 
     @FindBy(xpath = "//div[@class='panel header']//button[@type='button']")
@@ -26,9 +25,13 @@ public class HomePage {
     @FindBy(className = "logged-in")
     private WebElement welcomeMessage;
 
-    public HomePage(WebDriver driver){
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+    @Override
+    public boolean isOpened() {
+        return isLoggedIn();
+    }
+
+    public HomePage(WebDriver driver) {
+        super(driver);
     }
 
     public boolean isLoggedIn() {
@@ -48,7 +51,10 @@ public class HomePage {
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(logoutLink));
         logoutLink.click();
     }
-    public String welcomeText(){
-        return welcomeMessage.getText();
+    public String welcomeText() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.refreshed(
+                ExpectedConditions.visibilityOf(welcomeMessage)
+        )).getText();
     }
 }
