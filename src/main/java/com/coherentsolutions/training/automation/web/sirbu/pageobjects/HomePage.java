@@ -1,6 +1,7 @@
 package com.coherentsolutions.training.automation.web.sirbu.pageobjects;
 
 
+import com.coherentsolutions.training.automation.web.sirbu.utilities.WebElementUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -35,11 +36,7 @@ public class HomePage extends BasePage {
     }
 
     public boolean isLoggedIn() {
-        try {
-            return welcomeMessage.isDisplayed();
-        } catch (NoSuchElementException e) {
-            return false;
-        }
+        return WebElementUtils.isElementDisplayed(welcomeMessage);
     }
 
     public static By getLoggedInLocator() {

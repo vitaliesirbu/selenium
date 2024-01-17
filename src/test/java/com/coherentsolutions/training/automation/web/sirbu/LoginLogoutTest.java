@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-public class LoginLogoutTest extends BaseLoginTest {
+public class LoginLogoutTest extends BaseTest {
 
     private String username = ConfigReader.getInstance().getUsername();
     private String password = ConfigReader.getInstance().getPassword();

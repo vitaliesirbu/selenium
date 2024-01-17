@@ -6,16 +6,16 @@ import com.coherentsolutions.training.automation.web.sirbu.utilities.ConfigReade
 import com.coherentsolutions.training.automation.web.sirbu.utilities.WaitUtils;
 import com.coherentsolutions.training.automation.web.sirbu.utilities.WebDriverSingleton;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 
-public class BaseLoginTest {
+public class BaseTest {
 
     protected WebDriver driver;
     protected LoginPage loginPage;
     protected HomePage homePage;
     protected WaitUtils waitUtils;
 
-    @BeforeClass
+    @BeforeMethod
     public void setUp() {
         driver = WebDriverSingleton.getDriver();
         driver.get(ConfigReader.getInstance().getUrl());
