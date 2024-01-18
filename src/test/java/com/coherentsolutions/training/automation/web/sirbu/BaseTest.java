@@ -19,11 +19,16 @@ public class BaseTest {
         waitUtils = new WaitUtils(driver);
     }
 
-    protected <T> T initPage(Class<T> pageClass) {
+    protected <T> T initPage(Class<T> pageClass, String... args) {
         try {
-            return pageClass.getConstructor(WebDriver.class).newInstance(driver);
+            if (args.length > 0) {
+                return pageClass.getConstructor(WebDriver.class, String.class).newInstance(driver, args[0]);
+            } else {
+                return pageClass.getConstructor(WebDriver.class).newInstance(driver);
+            }
         } catch (Exception e) {
             throw new RuntimeException("Could not initialize page object: " + pageClass.getSimpleName(), e);
         }
     }
+
 }

@@ -19,11 +19,9 @@ public class ProtonLoginPage extends BasePage {
     private WebElement submitButton;
 
 
-    public ProtonLoginPage(WebDriver driver) {
+    public ProtonLoginPage(WebDriver driver, String url) {
         super(driver);
-        WaitUtils waitUtils = new WaitUtils(driver);
-        waitUtils.waitForElementPresence(By.id("password"), 10);
-
+        driver.get(url);
     }
 
     @Override
@@ -36,10 +34,9 @@ public class ProtonLoginPage extends BasePage {
     }
 
     public void login(String email, String password) {
-
-        emailField.clear();
+        WaitUtils waitUtils = new WaitUtils(driver);
+        waitUtils.waitForElementPresence(By.id("password"), 10);
         emailField.sendKeys(email);
-        passwordField.clear();
         passwordField.sendKeys(password);
         submitButton.click();
     }
