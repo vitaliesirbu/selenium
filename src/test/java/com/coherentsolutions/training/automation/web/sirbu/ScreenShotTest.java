@@ -16,15 +16,17 @@ public class ScreenShotTest extends BaseTest{
     private ProtonLoginPage loginPage;
     private ProtonHomePage homePage;
 
-    private String username = ConfigReader.getInstance().getUsername();
-    private String password = ConfigReader.getInstance().getPassword();
+    ConfigReader configReader = ConfigReader.getInstance("ScreenShotTest_config.properties");
+
+    private String username = configReader.getProperty("username");
+    private String password = configReader.getProperty("password");
 
     @BeforeMethod
     @Override
     public void setUp() {
         super.setUp();
-        loginPage = new ProtonLoginPage(driver, ConfigReader.getInstance().getUrl());
-        homePage = initPage(ProtonHomePage.class);
+        loginPage = new ProtonLoginPage(driver);
+        homePage = new ProtonHomePage(driver);
     }
 
     @Test

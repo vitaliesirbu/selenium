@@ -9,40 +9,28 @@ public class ConfigReader {
     private static ConfigReader instance;
     private Properties properties;
 
-    private ConfigReader() {
+    private ConfigReader(String configFile) {
         properties = new Properties();
-        try (InputStream input = ConfigReader.class.getClassLoader().getResourceAsStream("config.properties")) {
+        try (InputStream input = ConfigReader.class.getClassLoader().getResourceAsStream(configFile)) {
             properties.load(input);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static ConfigReader getInstance() {
+    public static synchronized ConfigReader getInstance(String configFile) {
         if (instance == null) {
-            synchronized (ConfigReader.class) {
-                if (instance == null) {
-                    instance = new ConfigReader();
-                }
-            }
+            instance = new ConfigReader(configFile);
         }
         return instance;
     }
 
+    public String getProperty(String propertyName) {
+        return properties.getProperty(propertyName);
+    }
     public String getUrl() {
-        return properties.getProperty("url");
-    }
-
-    public String getUsername() {
-        return properties.getProperty("username");
-    }
-
-    public String getPassword() {
-        return properties.getProperty("password");
-    }
-
-    public String getExpectedResult() {
-        return properties.getProperty("expectedresult");
+        return getProperty("url");
     }
 }
+
 

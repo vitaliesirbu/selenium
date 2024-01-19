@@ -13,16 +13,18 @@ public class LoginLogoutTest extends BaseTest {
     private LoginPage loginPage;
     private HomePage homePage;
 
-    private String username = ConfigReader.getInstance().getUsername();
-    private String password = ConfigReader.getInstance().getPassword();
-    private String expectedResult = ConfigReader.getInstance().getExpectedResult();
+    ConfigReader configReader = ConfigReader.getInstance("LoginLogoutTest_config.properties");
+
+    private String username = configReader.getProperty("username");
+    private String password = configReader.getProperty("password");
+    private String expectedResult = configReader.getProperty("expectedResult");
 
     @BeforeMethod
     @Override
     public void setUp() {
         super.setUp();
-        loginPage = initPage(LoginPage.class);
-        homePage = initPage(HomePage.class);
+        loginPage = new LoginPage(driver);
+        homePage = new HomePage(driver);
     }
     protected void login(String username, String password) {
         loginPage.login(username, password);

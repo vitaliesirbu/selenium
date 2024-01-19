@@ -19,9 +19,8 @@ public class ProtonLoginPage extends BasePage {
     private WebElement submitButton;
 
 
-    public ProtonLoginPage(WebDriver driver, String url) {
+    public ProtonLoginPage(WebDriver driver) {
         super(driver);
-        driver.get(url);
     }
 
     @Override
