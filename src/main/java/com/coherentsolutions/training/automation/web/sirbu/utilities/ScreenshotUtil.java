@@ -13,6 +13,11 @@ public class ScreenshotUtil {
     public static void captureAndSaveScreenshot(WebDriver driver, String destinationFilePath) {
         try {
             File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            
+            File destinationDir = new File(destinationFilePath).getParentFile();
+            if (!destinationDir.exists()) {
+                destinationDir.mkdirs();
+            }
 
             FileUtils.copyFile(screenshotFile, new File(destinationFilePath));
 
