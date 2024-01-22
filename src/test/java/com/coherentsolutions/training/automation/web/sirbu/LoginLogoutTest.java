@@ -13,7 +13,7 @@ public class LoginLogoutTest extends BaseTest {
     private LoginPage loginPage;
     private HomePage homePage;
 
-    ConfigReader configReader = ConfigReader.getInstance("LoginLogoutTest_config.properties");
+    ConfigReader configReader = ConfigReader.getInstance("config.properties");
 
     private String username = configReader.getProperty("username");
     private String password = configReader.getProperty("password");

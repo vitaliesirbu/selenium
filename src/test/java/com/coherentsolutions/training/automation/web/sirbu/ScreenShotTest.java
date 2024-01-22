@@ -16,7 +16,7 @@ public class ScreenShotTest extends BaseTest{
     private ProtonLoginPage loginPage;
     private ProtonHomePage homePage;
 
-    ConfigReader configReader = ConfigReader.getInstance("ScreenShotTest_config.properties");
+    ConfigReader configReader = ConfigReader.getInstance("config.properties");
 
     private String username = configReader.getProperty("username");
     private String password = configReader.getProperty("password");
