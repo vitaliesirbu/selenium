@@ -35,7 +35,7 @@ public class ScreenShotTest extends BaseTest{
         Assert.assertTrue(homePage.isOpened());
     }
 
-    @Test(dependsOnMethods = {"testSuccessfulLogin"})
+    @Test
     public void homePageScreenShotTest() {
         By elementLocator = By.xpath("//h2[@title='Inbox']");
         waitUtils.waitForElementPresence(elementLocator, 5);

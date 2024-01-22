@@ -1,5 +1,6 @@
 package com.coherentsolutions.training.automation.web.sirbu.pageobjects;
 
+import com.coherentsolutions.training.automation.web.sirbu.utilities.ElementUtils;
 import com.coherentsolutions.training.automation.web.sirbu.utilities.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -25,11 +26,7 @@ public class ProtonLoginPage extends BasePage {
 
     @Override
     public boolean isOpened() {
-        try {
-            return submitButton.isDisplayed();
-        } catch (NoSuchElementException e) {
-            return false;
-        }
+        return ElementUtils.isElementDisplayed(submitButton);
     }
 
     public void login(String email, String password) {
