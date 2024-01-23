@@ -24,4 +24,8 @@ public class WaitUtils {
         new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds))
                 .until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
+    public void waitForElementToBeClickable(By locator, long timeoutInSeconds) {
+        new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds))
+                .until(ExpectedConditions.elementToBeClickable(locator));
+    }
 }

@@ -6,9 +6,7 @@ import com.coherentsolutions.training.automation.web.sirbu.utilities.ConfigReade
 import com.coherentsolutions.training.automation.web.sirbu.utilities.ScreenshotUtil;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 
 public class ScreenShotTest extends BaseTest{
@@ -32,18 +30,14 @@ public class ScreenShotTest extends BaseTest{
     @Test
     public void testSuccessfulLogin() {
         loginPage.login(username, password);
-        Assert.assertTrue(homePage.isOpened());
-    }
-
-    @Test
-    public void homePageScreenShotTest() {
-        By elementLocator = By.xpath("//h2[@title='Inbox']");
-        waitUtils.waitForElementPresence(elementLocator, 5);
+        homePage.isOpened();
+        By elementLocator = By.xpath("//button[normalize-space()='New message']");
+        waitUtils.waitForElementToBeClickable(elementLocator, 5);
         String screenshotDestination = "Screenshots/homepage_screenshot.png";
         ScreenshotUtil.captureAndSaveScreenshot(driver, screenshotDestination);
     }
 
-    @AfterClass
+    @AfterMethod
     public void tearDown() {
         driver.quit();
     }

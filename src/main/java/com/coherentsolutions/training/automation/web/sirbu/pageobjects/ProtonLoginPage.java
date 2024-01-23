@@ -31,7 +31,7 @@ public class ProtonLoginPage extends BasePage {
 
     public void login(String email, String password) {
         WaitUtils waitUtils = new WaitUtils(driver);
-        waitUtils.waitForElementPresence(By.id("password"), 10);
+        waitUtils.waitForElementPresence(By.id("password"), 5);
         emailField.sendKeys(email);
         passwordField.sendKeys(password);
         submitButton.click();
