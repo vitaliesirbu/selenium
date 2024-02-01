@@ -1,36 +1,35 @@
 package com.coherentsolutions.training.automation.web.sirbu;
 
-import com.coherentsolutions.training.automation.web.sirbu.pageobjects.HomePage;
-import com.coherentsolutions.training.automation.web.sirbu.pageobjects.LoginPage;
 import com.coherentsolutions.training.automation.web.sirbu.utilities.ConfigReader;
 import com.coherentsolutions.training.automation.web.sirbu.utilities.WaitUtils;
 import com.coherentsolutions.training.automation.web.sirbu.utilities.WebDriverSingleton;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-public class BaseTest {
+import java.util.HashMap;
+import java.util.Map;
 
-    protected WebDriver driver;
-    protected LoginPage loginPage;
-    protected HomePage homePage;
+public class BaseTest {
+    public WebDriver driver;
     protected WaitUtils waitUtils;
+    private ConfigReader configReader;
 
     @BeforeMethod
     public void setUp() {
-        driver = WebDriverSingleton.getDriver();
-        driver.get(ConfigReader.getInstance().getUrl());
-        loginPage = new LoginPage(driver);
-        homePage = new HomePage(driver);
+        configReader = ConfigReader.getInstance("config.properties");
+        String downloadPath = configReader.getProperty("download.path");
+
+        ChromeOptions options = new ChromeOptions();
+
+        Map<String, Object> prefs = new HashMap<String, Object>();
+
+        prefs.put("download.default_directory", downloadPath);
+        options.setExperimentalOption("prefs", prefs);
+
+        driver = WebDriverSingleton.getDriver(options);
+        driver.get(ConfigReader.getInstance(String.valueOf(getClass())).getUrl());
         waitUtils = new WaitUtils(driver);
-    }
-
-    protected void login(String username, String password) {
-        loginPage.login(username, password);
-        waitUtils.waitForElementPresence(homePage.getLoggedInLocator(), 5);
-    }
-
-    protected void logout() {
-        homePage.logout();
-        waitUtils.waitForElementAbsence(HomePage.getLoggedInLocator(), 5);
     }
 }

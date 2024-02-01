@@ -6,4 +6,7 @@
             <!-- Add more classes if needed -->
         </classes>
     </test>
+    <listeners>
+        <listener class-name="com.coherentsolutions.training.automation.web.sirbu.utilities.TestListener"/>
+    </listeners>
 </suite>
