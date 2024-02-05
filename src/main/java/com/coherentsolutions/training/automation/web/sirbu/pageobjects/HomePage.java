@@ -23,7 +23,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//div[@aria-hidden='false']//a[normalize-space()='Sign Out']")
     private WebElement logoutLink;
 
-    @FindBy(className = "logged-in")
+    @FindBy(css = "div[class='panel header'] span[class='logged-in']")
     private WebElement welcomeMessage;
 
     @Override
