@@ -44,6 +44,8 @@ public class HomePage extends BasePage {
     }
 
     public void logout(){
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(myAccountButton));
+
         myAccountButton.click();
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(logoutLink));
         logoutLink.click();

@@ -3,10 +3,11 @@ package com.coherentsolutions.training.automation.web.sirbu;
 import com.coherentsolutions.training.automation.web.sirbu.pageobjects.HomePage;
 import com.coherentsolutions.training.automation.web.sirbu.pageobjects.LoginPage;
 import com.coherentsolutions.training.automation.web.sirbu.utilities.ConfigReader;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class LoginLogoutTest extends BaseTest {
 
@@ -35,7 +36,11 @@ public class LoginLogoutTest extends BaseTest {
         waitUtils.waitForElementAbsence(HomePage.getLoggedInLocator(), 5);
     }
 
-    @Test
+    @Test(groups = {"loginGroup"}, description = "This test verifies login functionality.")
+    @Epic("Authentication")
+    @Feature("Login")
+    @Story("Valid Login")
+
     public void testSuccessfulLogin() {
         login(username, password);
         String loggedInText = homePage.welcomeText();
@@ -43,13 +48,17 @@ public class LoginLogoutTest extends BaseTest {
         System.out.println("Actual result matches expected result: " + loggedInText);
     }
 
-    @Test(dependsOnMethods = {"testSuccessfulLogin"})
+    @Test(groups = {"logoutGroup"}, description = "This test verifies that user can successfully logout.")
+    @Epic("Authentication")
+    @Feature("Logout")
+    @Story("Valid Logout")
     public void testSuccessfulLogout() {
+        login(username, password);
         logout();
         Assert.assertFalse(homePage.isLoggedIn(), "User is still logged in when they should be logged out.");
     }
 
-    @AfterClass
+    @AfterMethod
     public void tearDown() {
         driver.quit();
     }
