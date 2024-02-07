@@ -1,16 +1,18 @@
 package com.coherentsolutions.training.automation.web.sirbu;
 
 import com.coherentsolutions.training.automation.web.sirbu.utilities.ConfigReader;
+import com.coherentsolutions.training.automation.web.sirbu.utilities.ScreenshotTestListener;
 import com.coherentsolutions.training.automation.web.sirbu.utilities.WaitUtils;
 import com.coherentsolutions.training.automation.web.sirbu.utilities.WebDriverSingleton;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Listeners ({ScreenshotTestListener.class})
 public class BaseTest {
     public WebDriver driver;
     protected WaitUtils waitUtils;

@@ -23,7 +23,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//div[@aria-hidden='false']//a[normalize-space()='Sign Out']")
     private WebElement logoutLink;
 
-    @FindBy(className = "logged-in")
+    @FindBy(css = "div[class='panel header'] span[class='logged-in']")
     private WebElement welcomeMessage;
 
     @Override
@@ -44,6 +44,8 @@ public class HomePage extends BasePage {
     }
 
     public void logout(){
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(myAccountButton));
+
         myAccountButton.click();
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(logoutLink));
         logoutLink.click();
