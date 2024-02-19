@@ -16,8 +16,6 @@ import java.time.Duration;
 
 public class HomePage extends BasePage {
 
-    private static final By LOGGED_IN_LOCATOR = By.className("logged-in");
-
     @FindBy(xpath = "//div[@class='panel header']//button[@type='button']")
     private WebElement myAccountButton;
     @FindBy(xpath = "//div[@aria-hidden='false']//a[normalize-space()='Sign Out']")
@@ -39,13 +37,8 @@ public class HomePage extends BasePage {
         return WebElementUtils.isElementDisplayed(welcomeMessage);
     }
 
-    public static By getLoggedInLocator() {
-        return LOGGED_IN_LOCATOR;
-    }
-
     public void logout(){
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(myAccountButton));
-
         myAccountButton.click();
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(logoutLink));
         logoutLink.click();

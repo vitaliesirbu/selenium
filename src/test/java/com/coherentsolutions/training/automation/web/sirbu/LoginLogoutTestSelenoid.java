@@ -6,15 +6,19 @@ import com.coherentsolutions.training.automation.web.sirbu.utilities.ConfigReade
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 
-public class LoginLogoutTest extends BaseTest {
+public class LoginLogoutTestSelenoid extends BaseTest {
 
     private LoginPage loginPage;
     private HomePage homePage;
@@ -28,7 +32,15 @@ public class LoginLogoutTest extends BaseTest {
     @BeforeMethod
     @Override
     public void setUp() {
-        super.setUp();
+        try {
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-gpu");
+            driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub/"), options);
+
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
     }
@@ -45,7 +57,9 @@ public class LoginLogoutTest extends BaseTest {
     @Feature("Login")
     @Story("Valid Login")
 
-    public void testSuccessfulLogin() {
+    public void testSuccessfulLogin() throws InterruptedException {
+        driver.get("https://magento.softwaretestingboard.com/");
+
         login(username, password);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -62,9 +76,8 @@ public class LoginLogoutTest extends BaseTest {
     @Feature("Logout")
     @Story("Valid Logout")
     public void testSuccessfulLogout() {
+        driver.get("https://magento.softwaretestingboard.com/");
         login(username, password);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until((driver) -> homePage.isLoggedIn());
         logout();
         Assert.assertFalse(homePage.isLoggedIn(), "User is still logged in when they should be logged out.");
     }
