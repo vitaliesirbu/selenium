@@ -42,6 +42,7 @@ public class LoginPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("authorization-link")));
 
         signInLink.click();
+        driver.navigate().refresh();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("email")));
 

@@ -36,6 +36,9 @@ public class LoginLogoutTestSelenoid extends BaseTest {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-gpu");
+            options.addArguments("--disable-dev-shm-usage");
+
+
             driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub/"), options);
 
         } catch (MalformedURLException e){
