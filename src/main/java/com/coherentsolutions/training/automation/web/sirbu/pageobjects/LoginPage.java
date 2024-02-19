@@ -1,10 +1,14 @@
 package com.coherentsolutions.training.automation.web.sirbu.pageobjects;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
+
 
 public class LoginPage extends BasePage {
 
@@ -34,12 +38,20 @@ public class LoginPage extends BasePage {
     }
 
     public void login(String email, String password) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("authorization-link")));
+
         signInLink.click();
+        driver.navigate().refresh();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("email")));
+
         emailField.clear();
         emailField.sendKeys(email);
         passwordFied.clear();
         passwordFied.sendKeys(password);
         loginButton.click();
+
     }
 
 }

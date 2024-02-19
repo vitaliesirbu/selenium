@@ -2,7 +2,7 @@
 <suite name="MyTestSuite">
     <test name="MyTest">
         <classes>
-            <class name="com.coherentsolutions.training.automation.web.sirbu.LoginLogoutTest"/>
+            <class name="com.coherentsolutions.training.automation.web.sirbu.LoginLogoutTestSelenoid"/>
             <!-- Add more classes if needed -->
         </classes>
     </test>
