@@ -41,13 +41,13 @@ public class BaseTest {
             }
 
             Map<String, Object> sauceOptions = new HashMap<>();
-            sauceOptions.put("username", "oauth-vitalie.sirbu0-c4836");
-            sauceOptions.put("accessKey", "68eb1fe7-e229-43ff-ae1a-0c6db80dbe78");
-            sauceOptions.put("build", "selenium-build-UW9U5");
-            sauceOptions.put("name", "My cloud test");
+            sauceOptions.put("username", configReader.getProperty("saucelabs.username"));
+            sauceOptions.put("accessKey", configReader.getProperty("saucelabs.accesskey"));
+            sauceOptions.put("build", configReader.getProperty("saucelabs.build"));
+            sauceOptions.put("name", configReader.getProperty("saucelabs.name"));
             browserOptions.setCapability("sauce:options", sauceOptions);
 
-            URL url = new URL("https://ondemand.eu-central-1.saucelabs.com:443/wd/hub");
+            URL url = new URL(configReader.getProperty("saucelabs.url"));
             driver = new RemoteWebDriver(url, browserOptions);
 
         } else if ("SELENOID".equalsIgnoreCase(env)) {
