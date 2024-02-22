@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="SauceLabs Test Suite">
+    <test name="Edge on Windows 10">
+        <parameter name="platform" value="Windows 10"/>
+        <parameter name="browserName" value="MicrosoftEdge"/>
+        <parameter name="browserVersion" value="latest"/>
+        <classes>
+            <class name="com.coherentsolutions.training.automation.web.sirbu.LoginLogoutTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

@@ -26,8 +26,9 @@ public class LoginLogoutTest extends BaseTest {
 
     @BeforeMethod
     @Override
-    public void setUp() throws MalformedURLException {
-        super.setUp();
+    @Parameters({"platform", "browserName", "browserVersion"})
+    public void setUp(@Optional String platform, @Optional String browserName, @Optional String browserVersion) throws MalformedURLException {
+        super.setUp(platform, browserName, browserVersion);
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
     }

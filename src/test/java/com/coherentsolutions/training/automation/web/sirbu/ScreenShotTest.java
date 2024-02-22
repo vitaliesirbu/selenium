@@ -22,8 +22,8 @@ public class ScreenShotTest extends BaseTest {
 
     @BeforeMethod
     @Override
-    public void setUp() throws MalformedURLException {
-        super.setUp();
+    public void setUp(@Optional String platform, @Optional String browserName, @Optional String browserVersion) throws MalformedURLException {
+        super.setUp(platform, browserName, browserVersion);
         loginPage = new ProtonLoginPage(driver);
         homePage = new ProtonHomePage(driver);
     }

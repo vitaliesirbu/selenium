@@ -44,7 +44,7 @@ public class BaseTest {
             sauceOptions.put("username", "oauth-vitalie.sirbu0-c4836");
             sauceOptions.put("accessKey", "68eb1fe7-e229-43ff-ae1a-0c6db80dbe78");
             sauceOptions.put("build", "selenium-build-UW9U5");
-            sauceOptions.put("name", "<your test name>");
+            sauceOptions.put("name", "My cloud test");
             browserOptions.setCapability("sauce:options", sauceOptions);
 
             URL url = new URL("https://ondemand.eu-central-1.saucelabs.com:443/wd/hub");
@@ -69,7 +69,6 @@ public class BaseTest {
             driver = WebDriverSingleton.getDriver(options);
         }
 
-        String url = configReader.getProperty("url");
         driver.get(ConfigReader.getInstance(String.valueOf(getClass())).getUrl());
         waitUtils = new WaitUtils(driver);
     }
