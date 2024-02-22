@@ -40,6 +40,16 @@ public class BaseTest {
 
             URL url = new URL("https://ondemand.eu-central-1.saucelabs.com:443/wd/hub");
             driver = new RemoteWebDriver(url, browserOptions);
+
+        } else if ("SELENOID".equalsIgnoreCase(env)) {
+
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--disable-dev-shm-usage");
+
+            driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
+
         } else {
 
             String downloadPath = configReader.getProperty("download.path");
