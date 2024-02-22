@@ -10,9 +10,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
+import java.net.MalformedURLException;
 import java.time.Duration;
 
-public class LoginLogoutTestLocal extends BaseTestLocal {
+public class LoginLogoutTest extends BaseTest {
 
     private LoginPage loginPage;
     private HomePage homePage;
@@ -25,7 +26,7 @@ public class LoginLogoutTestLocal extends BaseTestLocal {
 
     @BeforeMethod
     @Override
-    public void setUp() {
+    public void setUp() throws MalformedURLException {
         super.setUp();
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);

@@ -7,8 +7,10 @@ import com.coherentsolutions.training.automation.web.sirbu.utilities.ScreenshotU
 import org.openqa.selenium.By;
 import org.testng.annotations.*;
 
+import java.net.MalformedURLException;
 
-public class ScreenShotTestLocal extends BaseTestLocal {
+
+public class ScreenShotTest extends BaseTest {
 
     private ProtonLoginPage loginPage;
     private ProtonHomePage homePage;
@@ -20,7 +22,7 @@ public class ScreenShotTestLocal extends BaseTestLocal {
 
     @BeforeMethod
     @Override
-    public void setUp() {
+    public void setUp() throws MalformedURLException {
         super.setUp();
         loginPage = new ProtonLoginPage(driver);
         homePage = new ProtonHomePage(driver);

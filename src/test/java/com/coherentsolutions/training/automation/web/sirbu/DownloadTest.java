@@ -14,12 +14,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.net.MalformedURLException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
-public class DownloadTest extends BaseTestLocal {
+public class DownloadTest extends BaseTest {
 
     private DownloadPage downloadPage;
 
@@ -27,7 +28,7 @@ public class DownloadTest extends BaseTestLocal {
 
     @BeforeMethod
     @Override
-    public void setUp(){
+    public void setUp() throws MalformedURLException {
         super.setUp();
         downloadPage = new DownloadPage(driver);
     }

@@ -18,7 +18,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 
-public class LoginLogoutTestSelenoid extends BaseTestLocal {
+public class LoginLogoutTestSelenoid extends BaseTest {
 
     private LoginPage loginPage;
     private HomePage homePage;
