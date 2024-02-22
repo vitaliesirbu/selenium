@@ -4,11 +4,14 @@ import com.coherentsolutions.training.automation.web.sirbu.utilities.ConfigReade
 import com.coherentsolutions.training.automation.web.sirbu.utilities.ScreenshotTestListener;
 import com.coherentsolutions.training.automation.web.sirbu.utilities.WaitUtils;
 import com.coherentsolutions.training.automation.web.sirbu.utilities.WebDriverSingleton;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -22,15 +25,21 @@ public class BaseTest {
     private ConfigReader configReader;
 
     @BeforeMethod
-    public void setUp() throws MalformedURLException {
+    @Parameters({"platform", "browserName", "browserVersion"})
+    public void setUp(@Optional String platform, @Optional String browserName, @Optional String browserVersion) throws MalformedURLException {
+
         configReader = ConfigReader.getInstance("config.properties");
         String env = configReader.getProperty("env");
 
         if ("SAUCELABS".equalsIgnoreCase(env)) {
 
-            ChromeOptions browserOptions = new ChromeOptions();
-            browserOptions.setCapability("platformName", "Windows 10");
-            browserOptions.setCapability("browserVersion", "latest");
+            MutableCapabilities browserOptions = new MutableCapabilities();
+            if (platform != null && browserName != null && browserVersion != null) {
+                browserOptions.setCapability("platformName", platform);
+                browserOptions.setCapability("browserName", browserName);
+                browserOptions.setCapability("browserVersion", browserVersion);
+            }
+
             Map<String, Object> sauceOptions = new HashMap<>();
             sauceOptions.put("username", "oauth-vitalie.sirbu0-c4836");
             sauceOptions.put("accessKey", "68eb1fe7-e229-43ff-ae1a-0c6db80dbe78");
@@ -61,7 +70,7 @@ public class BaseTest {
         }
 
         String url = configReader.getProperty("url");
-        driver.get(url);
+        driver.get(ConfigReader.getInstance(String.valueOf(getClass())).getUrl());
         waitUtils = new WaitUtils(driver);
     }
 }
