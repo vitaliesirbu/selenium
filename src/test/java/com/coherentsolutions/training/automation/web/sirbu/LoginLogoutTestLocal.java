@@ -6,15 +6,13 @@ import com.coherentsolutions.training.automation.web.sirbu.utilities.ConfigReade
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.time.Duration;
 
-public class LoginLogoutTest extends BaseTest {
+public class LoginLogoutTestLocal extends BaseTestLocal {
 
     private LoginPage loginPage;
     private HomePage homePage;

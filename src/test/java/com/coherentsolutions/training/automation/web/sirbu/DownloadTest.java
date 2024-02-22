@@ -19,7 +19,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
-public class DownloadTest extends BaseTest {
+public class DownloadTest extends BaseTestLocal {
 
     private DownloadPage downloadPage;
 

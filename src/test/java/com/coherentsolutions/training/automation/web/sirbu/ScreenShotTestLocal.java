@@ -5,11 +5,10 @@ import com.coherentsolutions.training.automation.web.sirbu.pageobjects.ProtonLog
 import com.coherentsolutions.training.automation.web.sirbu.utilities.ConfigReader;
 import com.coherentsolutions.training.automation.web.sirbu.utilities.ScreenshotUtil;
 import org.openqa.selenium.By;
-import org.testng.Assert;
 import org.testng.annotations.*;
 
 
-public class ScreenShotTest extends BaseTest{
+public class ScreenShotTestLocal extends BaseTestLocal {
 
     private ProtonLoginPage loginPage;
     private ProtonHomePage homePage;

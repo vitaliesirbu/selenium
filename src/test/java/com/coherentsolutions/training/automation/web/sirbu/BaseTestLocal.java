@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Listeners ({ScreenshotTestListener.class})
-public class BaseTest {
+public class BaseTestLocal {
     public WebDriver driver;
     protected WaitUtils waitUtils;
     private ConfigReader configReader;
