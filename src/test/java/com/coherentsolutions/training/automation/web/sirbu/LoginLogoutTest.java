@@ -6,12 +6,11 @@ import com.coherentsolutions.training.automation.web.sirbu.utilities.ConfigReade
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
+import java.net.MalformedURLException;
 import java.time.Duration;
 
 public class LoginLogoutTest extends BaseTest {
@@ -27,8 +26,9 @@ public class LoginLogoutTest extends BaseTest {
 
     @BeforeMethod
     @Override
-    public void setUp() {
-        super.setUp();
+    @Parameters({"platform", "browserName", "browserVersion"})
+    public void setUp(@Optional String platform, @Optional String browserName, @Optional String browserVersion) throws MalformedURLException {
+        super.setUp(platform, browserName, browserVersion);
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
     }

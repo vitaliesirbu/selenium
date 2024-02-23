@@ -9,11 +9,10 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpHead;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.File;
+import java.net.MalformedURLException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -26,9 +25,10 @@ public class DownloadTest extends BaseTest {
     ConfigReader configReader = ConfigReader.getInstance("config.properties");
 
     @BeforeMethod
+    @Parameters({"platform", "browserName", "browserVersion"})
     @Override
-    public void setUp(){
-        super.setUp();
+    public void setUp(@Optional String platform, @Optional String browserName, @Optional String browserVersion) throws MalformedURLException {
+        super.setUp(platform, browserName, browserVersion);
         downloadPage = new DownloadPage(driver);
     }
 

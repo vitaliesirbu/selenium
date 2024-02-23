@@ -5,11 +5,12 @@ import com.coherentsolutions.training.automation.web.sirbu.pageobjects.ProtonLog
 import com.coherentsolutions.training.automation.web.sirbu.utilities.ConfigReader;
 import com.coherentsolutions.training.automation.web.sirbu.utilities.ScreenshotUtil;
 import org.openqa.selenium.By;
-import org.testng.Assert;
 import org.testng.annotations.*;
 
+import java.net.MalformedURLException;
 
-public class ScreenShotTest extends BaseTest{
+
+public class ScreenShotTest extends BaseTest {
 
     private ProtonLoginPage loginPage;
     private ProtonHomePage homePage;
@@ -21,8 +22,8 @@ public class ScreenShotTest extends BaseTest{
 
     @BeforeMethod
     @Override
-    public void setUp() {
-        super.setUp();
+    public void setUp(@Optional String platform, @Optional String browserName, @Optional String browserVersion) throws MalformedURLException {
+        super.setUp(platform, browserName, browserVersion);
         loginPage = new ProtonLoginPage(driver);
         homePage = new ProtonHomePage(driver);
     }
