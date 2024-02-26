@@ -16,13 +16,16 @@ public class LoginPage extends BasePage {
     private WebElement emailField;
 
     @FindBy(id="pass")
-    private WebElement passwordFied;
+    private WebElement passwordField;
 
     @FindBy(id="send2")
     private WebElement loginButton;
 
     @FindBy(className = "authorization-link")
     private WebElement signInLink;
+
+    @FindBy(xpath = "//div[@class='panel header']//a[normalize-space()='Create an Account']")
+    private WebElement createAccountLink;
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -48,9 +51,16 @@ public class LoginPage extends BasePage {
 
         emailField.clear();
         emailField.sendKeys(email);
-        passwordFied.clear();
-        passwordFied.sendKeys(password);
+        passwordField.clear();
+        passwordField.sendKeys(password);
         loginButton.click();
+
+    }
+
+    public void createAccount(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement createAccountLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='panel header']//a[normalize-space()='Create an Account']")));
+        createAccountLink.click();
 
     }
 
