@@ -1,6 +1,6 @@
 package com.coherentsolutions.training.automation.web.sirbu.pageobjects;
 
-import org.openqa.selenium.NoSuchElementException;
+import com.coherentsolutions.training.automation.web.sirbu.utilities.ElementUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,10 +16,6 @@ public class MyAccountPage extends BasePage{
 
     @Override
     public boolean isOpened() {
-        try {
-            return contactInformation.isDisplayed();
-        } catch (NoSuchElementException e) {
-            return false;
-        }
+        return ElementUtils.isOpened(contactInformation);
     }
 }

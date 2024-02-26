@@ -1,5 +1,6 @@
 package com.coherentsolutions.training.automation.web.sirbu.pageobjects;
 
+import com.coherentsolutions.training.automation.web.sirbu.utilities.ElementUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -33,11 +34,7 @@ public class AccountCreationPage extends  BasePage{
 
     @Override
     public boolean isOpened() {
-        try {
-            return createAccountButton.isDisplayed();
-        } catch (NoSuchElementException e) {
-            return false;
-        }
+        return ElementUtils.isOpened(createAccountButton);
     }
 
     public void createAccount(String firstName,String lastName, String email, String password){
@@ -51,6 +48,13 @@ public class AccountCreationPage extends  BasePage{
         confirmPasswordField.sendKeys(password);
 
         createAccountButton.click();
+    }
+
+    public String actualAccounName(WebElement actual){
+        String actualContactName = actual.getText();
+        actualContactName = actualContactName.split("\n")[0];
+        return actualContactName;
+
     }
 
 }

@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 
 public class ElementUtils {
 
-    public static boolean isElementDisplayed(WebElement element) {
+    public static boolean isOpened(WebElement element) {
         try {
             return element.isDisplayed();
         } catch (NoSuchElementException e) {

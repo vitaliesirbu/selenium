@@ -25,11 +25,6 @@ public class AccounCreationTest extends BaseTest{
 
     ConfigReader configReader = ConfigReader.getInstance("config.properties");
 
-    private String firstName = configReader.getProperty("newFirstName");
-    private String lastName = configReader.getProperty("newLastName");
-    private String email = configReader.getProperty("newEmail");
-    private String password = configReader.getProperty("newPassword");
-    private String expectedContactName = configReader.getProperty("expectedContactName");
 
     @BeforeClass
     @Override
@@ -48,17 +43,24 @@ public class AccounCreationTest extends BaseTest{
 
     public void testSuccessfulRegistration() {
         loginPage.createAccount();
-        accountCreationPage.createAccount(firstName,lastName,email,password);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until((driver) -> myAccountPage.isOpened());
+        wait.until((driver) -> accountCreationPage.isOpened());
+
+        String firstName = configReader.getProperty(NewUserTestCredentials.FIRST_NAME);
+        String lastName = configReader.getProperty(NewUserTestCredentials.LAST_NAME);
+        String email = configReader.getProperty(NewUserTestCredentials.EMAIL);
+        String password = configReader.getProperty(NewUserTestCredentials.PASSWORD);
+        String expectedContactName = configReader.getProperty(NewUserTestCredentials.EXPECTED_CONTACT_NAME);
+
+        accountCreationPage.createAccount(firstName,lastName,email,password);
+
+        WebDriverWait wait2 = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait2.until((driver) -> myAccountPage.isOpened());
 
         WebElement contactInformation = driver.findElement(By.cssSelector(".box-content p"));
 
-        String actualContactName = contactInformation.getText();
-        actualContactName = actualContactName.split("\n")[0];
-
-        Assert.assertEquals(actualContactName, expectedContactName, "The contact name does not match the expected value.");
+        Assert.assertEquals(accountCreationPage.actualAccounName(contactInformation), expectedContactName, "The contact name does not match the expected value.");
 
     }
 
