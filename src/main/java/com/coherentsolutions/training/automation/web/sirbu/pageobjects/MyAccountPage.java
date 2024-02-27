@@ -16,6 +16,6 @@ public class MyAccountPage extends BasePage{
 
     @Override
     public boolean isOpened() {
-        return ElementUtils.isOpened(contactInformation);
+        return ElementUtils.isElementDisplayed(contactInformation);
     }
 }

@@ -12,7 +12,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
-
 import java.net.MalformedURLException;
 import java.time.Duration;
 
@@ -24,6 +23,7 @@ public class AccounCreationTest extends BaseTest{
 
 
     ConfigReader configReader = ConfigReader.getInstance("config.properties");
+    private String expectedContactName = configReader.getProperty("expectedContactName");
 
 
     @BeforeClass
@@ -47,13 +47,9 @@ public class AccounCreationTest extends BaseTest{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until((driver) -> accountCreationPage.isOpened());
 
-        String firstName = configReader.getProperty(NewUserTestCredentials.FIRST_NAME);
-        String lastName = configReader.getProperty(NewUserTestCredentials.LAST_NAME);
-        String email = configReader.getProperty(NewUserTestCredentials.EMAIL);
-        String password = configReader.getProperty(NewUserTestCredentials.PASSWORD);
-        String expectedContactName = configReader.getProperty(NewUserTestCredentials.EXPECTED_CONTACT_NAME);
+        User baseUser = UserFactory.createBaseUser();
 
-        accountCreationPage.createAccount(firstName,lastName,email,password);
+        accountCreationPage.createAccount(baseUser.getFirstName(), baseUser.getLastName(), baseUser.getEmail(), baseUser.getPassword());
 
         WebDriverWait wait2 = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait2.until((driver) -> myAccountPage.isOpened());
