@@ -45,7 +45,7 @@ public class AccountCreationPage extends  BasePage{
         return ElementUtils.isElementDisplayed(createAccountButton);
     }
 
-    public void createAccount(User user){
+    public MyAccountPage createAccount(User user){
 
         fillInFirstNameField(user);
         fillInLastNameField(user);
@@ -54,6 +54,7 @@ public class AccountCreationPage extends  BasePage{
         fillInConfirmPasswordField(user);
 
         clickOnConfirmButton();
+        return new MyAccountPage(driver);
 
     }
 

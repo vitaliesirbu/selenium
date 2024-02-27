@@ -9,13 +9,11 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import java.net.MalformedURLException;
-import java.time.Duration;
 
-public class AccounCreationTest extends BaseTest{
+public class AccountCreationTest extends BaseTest{
     private static final int LOCATOR_TIMEOUT = 10;
 
     private LoginPage loginPage;
