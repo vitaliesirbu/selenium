@@ -15,6 +15,7 @@ import java.time.Duration;
 
 
 public class HomePage extends BasePage {
+    private static final int LOCATOR_TIMEOUT = 10;
 
     @FindBy(xpath = "//div[@class='panel header']//button[@type='button']")
     private WebElement myAccountButton;
@@ -38,13 +39,13 @@ public class HomePage extends BasePage {
     }
 
     public void logout(){
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(myAccountButton));
+        new WebDriverWait(driver, Duration.ofSeconds(LOCATOR_TIMEOUT)).until(ExpectedConditions.elementToBeClickable(myAccountButton));
         myAccountButton.click();
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(logoutLink));
+        new WebDriverWait(driver, Duration.ofSeconds(LOCATOR_TIMEOUT)).until(ExpectedConditions.elementToBeClickable(logoutLink));
         logoutLink.click();
     }
     public String welcomeText() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(LOCATOR_TIMEOUT));
         return wait.until(ExpectedConditions.refreshed(
                 ExpectedConditions.visibilityOf(welcomeMessage)
         )).getText();

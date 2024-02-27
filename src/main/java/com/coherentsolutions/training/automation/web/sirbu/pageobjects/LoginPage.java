@@ -11,6 +11,7 @@ import java.time.Duration;
 
 
 public class LoginPage extends BasePage {
+    private static final int LOCATOR_TIMEOUT = 10;
 
     @FindBy(id="email")
     private WebElement emailField;
@@ -41,7 +42,7 @@ public class LoginPage extends BasePage {
     }
 
     public void login(String email, String password) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(LOCATOR_TIMEOUT));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("authorization-link")));
 
         signInLink.click();
@@ -58,7 +59,7 @@ public class LoginPage extends BasePage {
     }
 
     public void createAccount(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(LOCATOR_TIMEOUT));
         WebElement createAccountLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='panel header']//a[normalize-space()='Create an Account']")));
         createAccountLink.click();
 

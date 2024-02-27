@@ -16,6 +16,7 @@ import java.net.MalformedURLException;
 import java.time.Duration;
 
 public class AccounCreationTest extends BaseTest{
+    private static final int LOCATOR_TIMEOUT = 10;
 
     private LoginPage loginPage;
     private AccountCreationPage accountCreationPage;
@@ -44,19 +45,13 @@ public class AccounCreationTest extends BaseTest{
     public void testSuccessfulRegistration() {
         loginPage.createAccount();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until((driver) -> accountCreationPage.isOpened());
-
         User baseUser = UserFactory.createBaseUser();
 
-        accountCreationPage.createAccount(baseUser.getFirstName(), baseUser.getLastName(), baseUser.getEmail(), baseUser.getPassword());
-
-        WebDriverWait wait2 = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait2.until((driver) -> myAccountPage.isOpened());
+        accountCreationPage.createAccount(baseUser);
 
         WebElement contactInformation = driver.findElement(By.cssSelector(".box-content p"));
 
-        Assert.assertEquals(accountCreationPage.actualAccounName(contactInformation), expectedContactName, "The contact name does not match the expected value.");
+        Assert.assertEquals(accountCreationPage.actualAccountName(contactInformation), expectedContactName, "The contact name does not match the expected value.");
 
     }
 
