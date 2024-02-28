@@ -9,13 +9,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class ElementUtils {
-    private static final int LOCATOR_TIMEOUT = 10;
 
     public static boolean isElementDisplayed(WebDriver driver, WebElement element, int timeoutInSeconds) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(LOCATOR_TIMEOUT));
-            wait.until(ExpectedConditions.visibilityOf(element));
-            return element.isDisplayed();
+            return new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds))
+                    .until(ExpectedConditions.visibilityOf(element))
+                    .isDisplayed();
         } catch (NoSuchElementException e) {
             return false;
         }
