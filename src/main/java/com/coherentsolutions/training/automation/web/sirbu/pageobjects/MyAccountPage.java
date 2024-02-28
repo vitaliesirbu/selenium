@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class MyAccountPage extends BasePage{
+    private static final int LOCATOR_TIMEOUT = 10;
 
     @FindBy(css=".box-content p")
     private WebElement contactInformation;
@@ -16,6 +17,6 @@ public class MyAccountPage extends BasePage{
 
     @Override
     public boolean isOpened() {
-        return ElementUtils.isElementDisplayed(contactInformation);
+        return ElementUtils.isElementDisplayed(driver, contactInformation, LOCATOR_TIMEOUT);
     }
 }

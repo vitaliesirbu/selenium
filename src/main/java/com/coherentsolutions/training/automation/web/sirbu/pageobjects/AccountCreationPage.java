@@ -42,7 +42,7 @@ public class AccountCreationPage extends  BasePage{
 
     @Override
     public boolean isOpened() {
-        return ElementUtils.isElementDisplayed(createAccountButton);
+        return ElementUtils.isElementDisplayed(driver, createAccountButton, LOCATOR_TIMEOUT);
     }
 
     public MyAccountPage createAccount(User user){
