@@ -35,9 +35,10 @@ public class MyAccountPage extends BasePage{
         return actualContactName;
 
     }
-    public void goToMyAccount(){
+    public String goToMyAccount(){
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(myAccountButton));
         myAccountButton.click();
         goToMyAccountButton.click();
+        return "My Account";
     }
 }

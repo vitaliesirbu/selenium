@@ -48,9 +48,9 @@ public class LoginPage extends BasePage {
 
     }
 
-    public void fillInEmailField(User user){emailField.sendKeys(user.getEmail());}
-    public void fillInPasswordField(User user){passwordField.sendKeys(user.getPassword());}
-    public void clickOnSignInButton(){signInButton.click();}
+    public LoginPage fillInEmailField(User user){emailField.sendKeys(user.getEmail());return this;}
+    public LoginPage fillInPasswordField(User user){passwordField.sendKeys(user.getPassword());return this;}
+    public HomePage clickOnSignInButton(){signInButton.click();return new HomePage(driver);}
 
 
 }
