@@ -1,8 +1,7 @@
 package com.coherentsolutions.training.automation.web.sirbu;
 
 import com.coherentsolutions.training.automation.web.sirbu.pageobjects.AccountCreationPage;
-import com.coherentsolutions.training.automation.web.sirbu.pageobjects.LoginPage;
-import com.coherentsolutions.training.automation.web.sirbu.pageobjects.MyAccountPage;
+import com.coherentsolutions.training.automation.web.sirbu.pageobjects.HomePage;
 import com.coherentsolutions.training.automation.web.sirbu.utilities.ConfigReader;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -14,12 +13,9 @@ import org.testng.annotations.*;
 import java.net.MalformedURLException;
 
 public class AccountCreationTest extends BaseTest{
-    private static final int LOCATOR_TIMEOUT = 10;
 
-    private LoginPage loginPage;
+    private HomePage homePage;
     private AccountCreationPage accountCreationPage;
-    private MyAccountPage myAccountPage;
-
 
     ConfigReader configReader = ConfigReader.getInstance("config.properties");
     private String expectedContactName = configReader.getProperty("expectedContactName");
@@ -30,9 +26,8 @@ public class AccountCreationTest extends BaseTest{
     @Parameters({"platform", "browserName", "browserVersion"})
     public void setUp(@Optional String platform, @Optional String browserName, @Optional String browserVersion) throws MalformedURLException {
         super.setUp(platform, browserName, browserVersion);
-        loginPage = new LoginPage(driver);
+        homePage = new HomePage(driver);
         accountCreationPage = new AccountCreationPage(driver);
-        myAccountPage = new MyAccountPage(driver);
     }
 
     @Test(groups = {"loginGroup"}, description = "This test verifies new account registration functionality.")
@@ -41,7 +36,7 @@ public class AccountCreationTest extends BaseTest{
     @Story("Valid Registration")
 
     public void testSuccessfulRegistration() {
-        loginPage.createAccount();
+        homePage.clickCreateAccountLink();
 
         User baseUser = UserFactory.createBaseUser();
 

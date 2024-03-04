@@ -1,10 +1,14 @@
 package com.coherentsolutions.training.automation.web.sirbu.pageobjects;
 
+import com.coherentsolutions.training.automation.web.sirbu.User;
+import com.coherentsolutions.training.automation.web.sirbu.utilities.ElementUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
@@ -20,49 +24,34 @@ public class LoginPage extends BasePage {
     private WebElement passwordField;
 
     @FindBy(id="send2")
-    private WebElement loginButton;
+    private WebElement signInButton;
 
-    @FindBy(className = "authorization-link")
-    private WebElement signInLink;
-
-    @FindBy(xpath = "//div[@class='panel header']//a[normalize-space()='Create an Account']")
-    private WebElement createAccountLink;
 
     public LoginPage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(new AjaxElementLocatorFactory(driver, LOCATOR_TIMEOUT), this);
     }
 
     @Override
     public boolean isOpened() {
-        try {
-            return loginButton.isDisplayed();
-        } catch (NoSuchElementException e) {
-            return false;
-        }
+        return ElementUtils.isElementDisplayed(driver, signInButton, LOCATOR_TIMEOUT);
     }
 
-    public void login(String email, String password) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(LOCATOR_TIMEOUT));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("authorization-link")));
 
-        signInLink.click();
-        driver.navigate().refresh();
+    public LoginPage login(User user) {
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("email")));
+        fillInEmailField(user);
+        fillInPasswordField(user);
 
-        emailField.clear();
-        emailField.sendKeys(email);
-        passwordField.clear();
-        passwordField.sendKeys(password);
-        loginButton.click();
+        clickOnSignInButton();
+
+        return new LoginPage(driver);
 
     }
 
-    public void createAccount(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(LOCATOR_TIMEOUT));
-        WebElement createAccountLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='panel header']//a[normalize-space()='Create an Account']")));
-        createAccountLink.click();
+    public void fillInEmailField(User user){emailField.sendKeys(user.getEmail());}
+    public void fillInPasswordField(User user){passwordField.sendKeys(user.getPassword());}
+    public void clickOnSignInButton(){signInButton.click();}
 
-    }
 
 }
