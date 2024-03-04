@@ -29,7 +29,6 @@ public class HomePage extends BasePage {
 
     public HomePage(WebDriver driver){
         super(driver);
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver, LOCATOR_TIMEOUT), this);
     }
     @Override
     public boolean isOpened() {

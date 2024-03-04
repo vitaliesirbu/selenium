@@ -29,7 +29,6 @@ public class LoginPage extends BasePage {
 
     public LoginPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver, LOCATOR_TIMEOUT), this);
     }
 
     @Override

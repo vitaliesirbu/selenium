@@ -44,7 +44,7 @@ public class AccountCreationTest extends BaseTest{
 
         WebElement contactInformation = driver.findElement(By.cssSelector(".box-content p"));
 
-        Assert.assertEquals(accountCreationPage.actualAccountName(contactInformation), expectedContactName, "The contact name does not match the expected value.");
+        Assert.assertEquals(accountCreationPage.getAccountName(contactInformation), expectedContactName, "The contact name does not match the expected value.");
 
     }
 

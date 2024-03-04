@@ -2,17 +2,12 @@ package com.coherentsolutions.training.automation.web.sirbu.pageobjects;
 
 import com.coherentsolutions.training.automation.web.sirbu.User;
 import com.coherentsolutions.training.automation.web.sirbu.utilities.ElementUtils;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class AccountCreationPage extends  BasePage{
 
@@ -34,9 +29,7 @@ public class AccountCreationPage extends  BasePage{
     private WebElement createAccountButton;
 
     public AccountCreationPage(WebDriver driver) {
-
         super(driver);
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver, LOCATOR_TIMEOUT), this);
     }
 
 
@@ -58,30 +51,34 @@ public class AccountCreationPage extends  BasePage{
 
     }
 
-    public void fillInFirstNameField(User user){
+    public AccountCreationPage fillInFirstNameField(User user) {
         firstNameField.sendKeys(user.getFirstName());
+        return this;
     }
-    public void fillInLastNameField(User user){
+    public AccountCreationPage fillInLastNameField(User user) {
         lastNameField.sendKeys(user.getLastName());
+        return this;
     }
-    public void fillInEmailField(User user){
+    public AccountCreationPage fillInEmailField(User user) {
         emailField.sendKeys(user.getEmail());
+        return this;
     }
-    public void fillInPasswordField(User user){
+    public AccountCreationPage fillInPasswordField(User user) {
         passwordField.sendKeys(user.getPassword());
+        return this;
     }
-    public void fillInConfirmPasswordField(User user){
+    public AccountCreationPage fillInConfirmPasswordField(User user) {
         confirmPasswordField.sendKeys(user.getPassword());
+        return this;
     }
-    public void clickOnConfirmButton(){
+    public MyAccountPage clickOnConfirmButton() {
         createAccountButton.click();
+        return new MyAccountPage(driver);
     }
 
-    public String actualAccountName(WebElement actual){
+    public String getAccountName(WebElement actual){
         String actualContactName = actual.getText();
         actualContactName = actualContactName.split("\n")[0];
         return actualContactName;
-
     }
-
 }
