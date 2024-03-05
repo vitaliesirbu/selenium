@@ -15,6 +15,8 @@ public class MyAccountPage extends BasePage{
     private WebElement myAccountButton;
     @FindBy(xpath = "//div[@aria-hidden='false']//a[normalize-space()='My Account']")
     private WebElement goToMyAccountButton;
+    @FindBy(xpath = "//a[normalize-space()='Address Book']")
+    private WebElement addressPagelink;
 
     @FindBy(css=".box-content p")
     public WebElement contactInformation;
@@ -40,5 +42,9 @@ public class MyAccountPage extends BasePage{
         myAccountButton.click();
         goToMyAccountButton.click();
         return "My Account";
+    }
+    public AddressPage goToAddressPage(){
+        addressPagelink.click();
+        return new AddressPage(driver);
     }
 }

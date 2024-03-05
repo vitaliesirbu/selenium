@@ -11,8 +11,6 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 public class AccountCreationPage extends  BasePage{
 
-    private static final int LOCATOR_TIMEOUT = 10;
-
     @FindBy(id="firstname")
     private WebElement firstNameField;
     @FindBy(id="lastname")
