@@ -1,6 +1,7 @@
 package com.coherentsolutions.training.automation.web.sirbu;
 
 import com.coherentsolutions.training.automation.web.sirbu.pageobjects.*;
+import com.coherentsolutions.training.automation.web.sirbu.utilities.AddressAssertion;
 import com.coherentsolutions.training.automation.web.sirbu.utilities.ConfigReader;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -42,8 +43,23 @@ public class AddNewAddressTest extends BaseTest{
         myAccountPage.goToAddressPage();
         adressPage.clickAddNewAddress();
         createNewAddressPage.addNewAddress(baseUser);
+        myAccountPage.goToMyAccount();
+
+        String actualBillingAddress = myAccountPage.getBillingAddress();
+        String[] actualAddressLines = actualBillingAddress.split("\n");
 
 
+        String expectedBillingAddressName = configReader.getProperty("billing.address.name");
+        String expectedBillingAddressLine1 = configReader.getProperty("billing.address.line1");
+        String expectedBillingAddressLine2 = configReader.getProperty("billing.address.line2");
+        String expectedBillingAddressLine3 = configReader.getProperty("billing.address.line3");
+        String expectedBillingAddressCity = configReader.getProperty("billing.address.city");
+
+        AddressAssertion.assertBillingAddressFields(expectedBillingAddressName, actualAddressLines[0].trim(),
+                expectedBillingAddressLine1, actualAddressLines[1].trim(),
+                expectedBillingAddressLine2,actualAddressLines[2].trim(),
+                expectedBillingAddressLine3, actualAddressLines[3].trim(),
+                expectedBillingAddressCity, actualAddressLines[4].trim());
     }
     @AfterClass
     public void tearDown() {

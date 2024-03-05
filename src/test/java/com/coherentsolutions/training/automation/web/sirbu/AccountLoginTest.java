@@ -18,6 +18,7 @@ public class AccountLoginTest extends BaseTest{
     private MyAccountPage myAccountPage;
 
     ConfigReader configReader = ConfigReader.getInstance("config.properties");
+    String expectedUsername = configReader.getProperty("expectedContactName");
 
     @BeforeClass
     @Override
@@ -42,7 +43,7 @@ public class AccountLoginTest extends BaseTest{
         myAccountPage.goToMyAccount();
 
         String actualUsername = myAccountPage.actualAccountName(myAccountPage.contactInformation);
-        String expectedUsername = configReader.getProperty("expectedContactName");
+
         Assert.assertEquals(actualUsername, expectedUsername, "The actual username does not match the expected username.");
 
     }

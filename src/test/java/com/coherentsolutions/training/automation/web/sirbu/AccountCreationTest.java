@@ -2,6 +2,7 @@ package com.coherentsolutions.training.automation.web.sirbu;
 
 import com.coherentsolutions.training.automation.web.sirbu.pageobjects.AccountCreationPage;
 import com.coherentsolutions.training.automation.web.sirbu.pageobjects.HomePage;
+import com.coherentsolutions.training.automation.web.sirbu.pageobjects.MyAccountPage;
 import com.coherentsolutions.training.automation.web.sirbu.utilities.ConfigReader;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -16,6 +17,7 @@ public class AccountCreationTest extends BaseTest{
 
     private HomePage homePage;
     private AccountCreationPage accountCreationPage;
+    private MyAccountPage myAccountPage;
 
     ConfigReader configReader = ConfigReader.getInstance("config.properties");
     private String expectedContactName = configReader.getProperty("expectedContactName");
@@ -28,6 +30,7 @@ public class AccountCreationTest extends BaseTest{
         super.setUp(platform, browserName, browserVersion);
         homePage = new HomePage(driver);
         accountCreationPage = new AccountCreationPage(driver);
+        myAccountPage =new MyAccountPage(driver);
     }
 
     @Test(groups = {"loginGroup"}, description = "This test verifies new account registration functionality.")
@@ -42,9 +45,9 @@ public class AccountCreationTest extends BaseTest{
 
         accountCreationPage.createAccount(baseUser);
 
-        WebElement contactInformation = driver.findElement(By.cssSelector(".box-content p"));
+        String actualContactName = myAccountPage.getContactInformation();
 
-        Assert.assertEquals(accountCreationPage.getAccountName(contactInformation), expectedContactName, "The contact name does not match the expected value.");
+        Assert.assertEquals(actualContactName, expectedContactName, "The contact name does not match the expected value.");
 
     }
 

@@ -1,6 +1,7 @@
 package com.coherentsolutions.training.automation.web.sirbu.pageobjects;
 
 import com.coherentsolutions.training.automation.web.sirbu.utilities.ElementUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,6 +21,8 @@ public class MyAccountPage extends BasePage{
 
     @FindBy(css=".box-content p")
     public WebElement contactInformation;
+    @FindBy(xpath = "//div[@class='box box-billing-address']//div[@class='box-content']")
+    private WebElement billingAddressSection;
 
     public MyAccountPage(WebDriver driver) {
         super(driver);
@@ -37,6 +40,9 @@ public class MyAccountPage extends BasePage{
         return actualContactName;
 
     }
+    public String getContactInformation() {
+        return contactInformation.getText().split("\n")[0];
+    }
     public String goToMyAccount(){
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(myAccountButton));
         myAccountButton.click();
@@ -46,5 +52,10 @@ public class MyAccountPage extends BasePage{
     public AddressPage goToAddressPage(){
         addressPagelink.click();
         return new AddressPage(driver);
+    }
+    public String getBillingAddress() {
+
+        WebElement addressElement = billingAddressSection.findElement(By.tagName("address"));
+        return addressElement.getText();
     }
 }
