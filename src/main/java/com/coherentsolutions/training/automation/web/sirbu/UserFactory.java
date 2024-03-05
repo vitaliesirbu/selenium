@@ -16,7 +16,7 @@ public class UserFactory {
         String streetLine2 = configReader.getProperty("streetLine2");
         String streetLine3 = configReader.getProperty("streetLine3");
         String city = configReader.getProperty("city");
-        String province = configReader.getProperty("province");
+        String province = configReader.getProperty("state");
         String postalCode = configReader.getProperty("postalCode");
         String country = configReader.getProperty("country");
         String phoneNumber = configReader.getProperty("phoneNumber");

@@ -49,8 +49,8 @@ public class CreateNewAddressPage extends BasePage{
         fillInStateField(user);
         fillInZipField(user);
 
-        selectShippingCheckbox();
-        selectBillingCheckbox();
+        //selectShippingCheckbox();
+        //selectBillingCheckbox();
 
         clickOnSaveAddressButton();
 
@@ -81,7 +81,7 @@ public class CreateNewAddressPage extends BasePage{
     }
     public CreateNewAddressPage fillInStateField(User user){
         Select dropdown = new Select(stateAndProvinceSelectField);
-        dropdown.selectByVisibleText(user.getAddress().getProvince());
+        dropdown.selectByValue(user.getAddress().getProvince());
         return this;
     }
     public CreateNewAddressPage fillInZipField(User user){
@@ -90,7 +90,7 @@ public class CreateNewAddressPage extends BasePage{
     }
     public CreateNewAddressPage fillInCountryField(User user){
         Select dropdown = new Select(countrySelectField);
-        dropdown.selectByVisibleText(user.getAddress().getCountry());
+        dropdown.selectByValue(user.getAddress().getCountry());
         return this;
     }
     public CreateNewAddressPage fillInPhoneField(User user){
@@ -98,15 +98,15 @@ public class CreateNewAddressPage extends BasePage{
         return this;
     }
     public CreateNewAddressPage selectBillingCheckbox(){
-        if (!defaultBillingAddressCheckBox.isSelected()){
+
             defaultBillingAddressCheckBox.click();
-        }
+
         return this;
     }
     public CreateNewAddressPage selectShippingCheckbox(){
-        if (!defaultShippingAddressCheckBox.isSelected()){
+
             defaultShippingAddressCheckBox.click();
-        }
+
         return this;
     }
 

@@ -23,6 +23,10 @@ public class AddNewAddressTest extends BaseTest{
     public void setUp(@Optional String platform, @Optional String browserName, @Optional String browserVersion) throws MalformedURLException {
         super.setUp(platform, browserName, browserVersion);
         homePage = new HomePage(driver);
+        loginPage = new LoginPage(driver);
+        myAccountPage = new MyAccountPage(driver);
+        adressPage = new AddressPage(driver);
+        createNewAddressPage = new CreateNewAddressPage(driver);
 
     }
 
@@ -31,6 +35,13 @@ public class AddNewAddressTest extends BaseTest{
     @Feature("Adress")
     @Story("Creating new address")
     public void testAddNewAddress(){
+        homePage.clickSignInLink();
+        User baseUser = UserFactory.createBaseUser();
+        loginPage.login(baseUser);
+        myAccountPage.goToMyAccount();
+        myAccountPage.goToAddressPage();
+        adressPage.clickAddNewAddress();
+        createNewAddressPage.addNewAddress(baseUser);
 
 
     }
