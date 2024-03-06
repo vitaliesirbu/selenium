@@ -11,7 +11,6 @@ public class UserFactory {
         String email = configReader.getProperty("newEmail");
         String password = configReader.getProperty("newPassword");
 
-
         String streetLine1 = configReader.getProperty("streetLine1");
         String streetLine2 = configReader.getProperty("streetLine2");
         String streetLine3 = configReader.getProperty("streetLine3");
@@ -21,13 +20,10 @@ public class UserFactory {
         String country = configReader.getProperty("country");
         String phoneNumber = configReader.getProperty("phoneNumber");
 
-
         Address address = new Address(streetLine1, streetLine2, streetLine3, city, province, postalCode, country, phoneNumber);
-
         if (firstName == null || lastName == null || email == null || password == null) {
             throw new IllegalStateException("One of the user properties is null. Please check config.properties file.");
         }
-
         return new User(firstName, lastName, email, password, address);
     }
 }

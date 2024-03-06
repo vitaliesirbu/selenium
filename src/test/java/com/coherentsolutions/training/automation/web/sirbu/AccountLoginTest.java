@@ -16,7 +16,6 @@ public class AccountLoginTest extends BaseTest{
     private HomePage homePage;
     private LoginPage loginPage;
     private MyAccountPage myAccountPage;
-
     ConfigReader configReader = ConfigReader.getInstance("config.properties");
     String expectedUsername = configReader.getProperty("expectedContactName");
 
@@ -29,27 +28,21 @@ public class AccountLoginTest extends BaseTest{
         loginPage = new LoginPage(driver);
         myAccountPage = new MyAccountPage(driver);
     }
-
     @Test(groups = {"loginGroup"}, description = "This test verifies  account login functionality.")
     @Epic("Authentication")
     @Feature("Login")
     @Story("Valid Login")
 
     public void testSuccessfulLogin(){
-
         homePage.clickSignInLink();
         User baseUser = UserFactory.createBaseUser();
         loginPage.login(baseUser);
         myAccountPage.goToMyAccount();
-
         String actualUsername = myAccountPage.actualAccountName(myAccountPage.contactInformation);
-
         Assert.assertEquals(actualUsername, expectedUsername, "The actual username does not match the expected username.");
-
     }
     @AfterClass
     public void tearDown() {
         driver.quit();
     }
-
 }

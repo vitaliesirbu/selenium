@@ -7,7 +7,6 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.testng.annotations.*;
-
 import java.net.MalformedURLException;
 
 public class AddNewAddressTest extends BaseTest{
@@ -28,7 +27,6 @@ public class AddNewAddressTest extends BaseTest{
         myAccountPage = new MyAccountPage(driver);
         adressPage = new AddressPage(driver);
         createNewAddressPage = new CreateNewAddressPage(driver);
-
     }
 
     @Test(groups = {"addressGroup"}, description = "This test verifies  adding new address functionality.")
@@ -47,7 +45,6 @@ public class AddNewAddressTest extends BaseTest{
 
         String actualBillingAddress = myAccountPage.getBillingAddress();
         String[] actualAddressLines = actualBillingAddress.split("\n");
-
 
         String expectedBillingAddressName = configReader.getProperty("billing.address.name");
         String expectedBillingAddressLine1 = configReader.getProperty("billing.address.line1");

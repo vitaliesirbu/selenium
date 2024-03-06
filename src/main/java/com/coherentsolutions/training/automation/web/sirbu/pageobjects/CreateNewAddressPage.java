@@ -31,14 +31,12 @@ public class CreateNewAddressPage extends BasePage{
     @FindBy(xpath = "//input[@id='primary_shipping']")
     private WebElement defaultShippingAddressCheckBox;
 
-
     public CreateNewAddressPage(WebDriver driver) {super(driver);}
 
     @Override
     public boolean isOpened() {
         return ElementUtils.isElementDisplayed(driver, saveAddressButton, LOCATOR_TIMEOUT);
     }
-
     public AddressPage addNewAddress(User user){
         fillInStreetAddressField1(user);
         fillInStreetAddressField2(user);
@@ -48,13 +46,7 @@ public class CreateNewAddressPage extends BasePage{
         fillInPhoneField(user);
         fillInStateField(user);
         fillInZipField(user);
-
-        //selectShippingCheckbox();
-        //selectBillingCheckbox();
-
         clickOnSaveAddressButton();
-
-
         return new AddressPage(driver);
     }
 
@@ -62,7 +54,6 @@ public class CreateNewAddressPage extends BasePage{
         saveAddressButton.click();
         return new AddressPage(driver);
     }
-
     public CreateNewAddressPage fillInStreetAddressField1(User user){
        streetLine1Field.sendKeys(user.getAddress().getStreetLine1());
         return this;
@@ -98,16 +89,11 @@ public class CreateNewAddressPage extends BasePage{
         return this;
     }
     public CreateNewAddressPage selectBillingCheckbox(){
-
-            defaultBillingAddressCheckBox.click();
-
+        defaultBillingAddressCheckBox.click();
         return this;
     }
     public CreateNewAddressPage selectShippingCheckbox(){
-
-            defaultShippingAddressCheckBox.click();
-
+        defaultShippingAddressCheckBox.click();
         return this;
     }
-
 }

@@ -12,7 +12,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;

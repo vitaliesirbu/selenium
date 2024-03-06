@@ -34,7 +34,6 @@ public class MyAccountPage extends BasePage{
     }
 
     public String actualAccountName(WebElement actual){
-
         String actualContactName = actual.getText();
         actualContactName = actualContactName.split("\n")[0];
         return actualContactName;
@@ -54,7 +53,6 @@ public class MyAccountPage extends BasePage{
         return new AddressPage(driver);
     }
     public String getBillingAddress() {
-
         WebElement addressElement = billingAddressSection.findElement(By.tagName("address"));
         return addressElement.getText();
     }
