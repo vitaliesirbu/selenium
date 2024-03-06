@@ -1,28 +1,19 @@
 package com.coherentsolutions.training.automation.web.sirbu.pageobjects;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+import com.coherentsolutions.training.automation.web.sirbu.User;
+import com.coherentsolutions.training.automation.web.sirbu.utilities.ElementUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import java.time.Duration;
-
 
 public class LoginPage extends BasePage {
-
-    @FindBy(id="email")
+    private static final int LOCATOR_TIMEOUT = 10;
+    @FindBy(id = "email")
     private WebElement emailField;
-
-    @FindBy(id="pass")
-    private WebElement passwordFied;
-
-    @FindBy(id="send2")
-    private WebElement loginButton;
-
-    @FindBy(className = "authorization-link")
-    private WebElement signInLink;
+    @FindBy(id = "pass")
+    private WebElement passwordField;
+    @FindBy(id = "send2")
+    private WebElement signInButton;
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -30,28 +21,24 @@ public class LoginPage extends BasePage {
 
     @Override
     public boolean isOpened() {
-        try {
-            return loginButton.isDisplayed();
-        } catch (NoSuchElementException e) {
-            return false;
-        }
+        return ElementUtils.isElementDisplayed(driver, signInButton, LOCATOR_TIMEOUT);
     }
-
-    public void login(String email, String password) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("authorization-link")));
-
-        signInLink.click();
-        driver.navigate().refresh();
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("email")));
-
-        emailField.clear();
-        emailField.sendKeys(email);
-        passwordFied.clear();
-        passwordFied.sendKeys(password);
-        loginButton.click();
-
+    public LoginPage login(User user) {
+        fillInEmailField(user);
+        fillInPasswordField(user);
+        clickOnSignInButton();
+        return new LoginPage(driver);
     }
-
+    public LoginPage fillInEmailField(User user) {
+        emailField.sendKeys(user.getEmail());
+        return this;
+    }
+    public LoginPage fillInPasswordField(User user) {
+        passwordField.sendKeys(user.getPassword());
+        return this;
+    }
+    public HomePage clickOnSignInButton() {
+        signInButton.click();
+        return new HomePage(driver);
+    }
 }
